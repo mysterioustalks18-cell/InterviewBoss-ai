@@ -1,0 +1,87 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and settings",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "plan": { "type": "string", "enum": ["FREE", "BASIC", "PRO"] },
+        "usage": {
+          "type": "object",
+          "properties": {
+            "resumes": { "type": "number" },
+            "interviews": { "type": "number" },
+            "codeAudits": { "type": "number" },
+            "lastReset": { "type": "string", "format": "date-time" }
+          }
+        },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Resume": {
+      "title": "Resume",
+      "description": "Resume data and optimization history",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "atsScore": { "type": "number" },
+        "optimization": { "type": "object" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "content"]
+    },
+    "Interview": {
+      "title": "Interview",
+      "description": "Interview session and performance data",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "role": { "type": "string" },
+        "mode": { "type": "string", "enum": ["HR", "Technical", "Stress"] },
+        "questions": { "type": "array" },
+        "score": { "type": "number" },
+        "feedback": { "type": "object" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "role"]
+    },
+    "CodeAudit": {
+      "title": "CodeAudit",
+      "description": "Code analysis and error detection history",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "code": { "type": "string" },
+        "language": { "type": "string" },
+        "analysis": { "type": "object" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "code"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": {
+      "schema": "User",
+      "description": "User profile documents"
+    },
+    "/resumes/{resumeId}": {
+      "schema": "Resume",
+      "description": "User resumes"
+    },
+    "/interviews/{interviewId}": {
+      "schema": "Interview",
+      "description": "Interview sessions"
+    },
+    "/code_audits/{auditId}": {
+      "schema": "CodeAudit",
+      "description": "Code analysis records"
+    }
+  }
+}

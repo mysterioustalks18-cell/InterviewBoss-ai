@@ -1,0 +1,5 @@
+{
+  "name": "InterviewBoss AI",
+  "description": "Premium AI-powered interview preparation and career optimization platform. Features include Resume Optimizer PRO, AI Interview Trainer PRO, and Code Error Detector PRO.",
+  "requestFramePermissions": ["microphone"]
+}
